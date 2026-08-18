@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: 'B Nazanin';
+  src: local('B Nazanin'), local('BNazanin'), local('Nazanin'),
+       url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'B Nazanin';
+  src: local('B Nazanin Bold'), local('BNazanin-Bold'), local('Nazanin-Bold'),
+       url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    font-family: 'B Nazanin', 'BNazanin', 'Vazirmatn', Tahoma, system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body, button, input, select, textarea {
+    font-family: 'B Nazanin', 'BNazanin', 'Vazirmatn', Tahoma, system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Safe area padding for mobile devices */
+.safe-area-pb {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Custom glowing pulse for urgent emergency call buttons */
+@keyframes emergency-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(37, 99, 235, 0);
+  }
+}
+
+.emergency-pulse-btn {
+  animation: emergency-pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes call-ring {
+  0% { transform: rotate(0deg) scale(1); }
+  10% { transform: rotate(-15deg) scale(1.1); }
+  20% { transform: rotate(15deg) scale(1.1); }
+  30% { transform: rotate(-10deg) scale(1.1); }
+  40% { transform: rotate(10deg) scale(1.1); }
+  50% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.animate-call-ring {
+  animation: call-ring 2.5s infinite ease-in-out;
+}
+
+

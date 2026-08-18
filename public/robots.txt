@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Search Engine Crawlers Guidance & Sitemap Link
+Sitemap: https://behkar-saveh.ir/sitemap.xml
