@@ -2047,53 +2047,138 @@ export const AdminPanel: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0 flex-wrap">
+                    <div className="flex items-center gap-3 bg-white dark:bg-slate-800/90 p-2 sm:px-3 sm:py-2 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm shrink-0">
+                      <div className="text-right">
+                        <span className="text-xs font-black text-slate-900 dark:text-white block">
+                          {[
+                            localSettings.showPricingSection !== false,
+                            localSettings.showServicesSection !== false,
+                            localSettings.showGallerySection !== false,
+                            localSettings.showCoverageMapSection !== false,
+                            localSettings.showWhyUsSection !== false,
+                            localSettings.showFaqSection !== false,
+                            localSettings.showReviewsSection !== false,
+                            localSettings.showHeroSection !== false
+                          ].filter(Boolean).length >= 7
+                            ? 'تمام بخش‌ها فعال هستند'
+                            : 'مخفی‌سازی موقت بخش‌ها'}
+                        </span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          {[
+                            localSettings.showPricingSection !== false,
+                            localSettings.showServicesSection !== false,
+                            localSettings.showGallerySection !== false,
+                            localSettings.showCoverageMapSection !== false,
+                            localSettings.showWhyUsSection !== false,
+                            localSettings.showFaqSection !== false,
+                            localSettings.showReviewsSection !== false,
+                            localSettings.showHeroSection !== false
+                          ].filter(Boolean).length >= 7
+                            ? 'سوئیچ جهت غیرفعال‌سازی موقت'
+                            : 'سوئیچ جهت فعال‌سازی سراسری'}
+                        </span>
+                      </div>
                       <button
                         type="button"
                         onClick={() => {
-                          const updated = {
-                            ...localSettings,
-                            showHeroSection: true,
-                            showServicesSection: true,
-                            showPricingSection: true,
-                            showGallerySection: true,
-                            showCoverageMapSection: true,
-                            showWhyUsSection: true,
-                            showReviewsSection: true,
-                            showFaqSection: true,
-                            showFloatingBar: true,
-                          };
-                          setLocalSettings(updated);
-                          updateSettings(updated);
-                          showNotification('تمامی بخش‌های وب‌سایت با موفقیت فعال و نمایان شدند.');
-                        }}
-                        className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer shadow-sm flex items-center gap-1.5 active:scale-95"
-                      >
-                        <CheckCircle className="w-4 h-4" />
-                        <span>فعال‌سازی همه بخش‌ها</span>
-                      </button>
+                          const isCurrentlyActive = [
+                            localSettings.showPricingSection !== false,
+                            localSettings.showServicesSection !== false,
+                            localSettings.showGallerySection !== false,
+                            localSettings.showCoverageMapSection !== false,
+                            localSettings.showWhyUsSection !== false,
+                            localSettings.showFaqSection !== false,
+                            localSettings.showReviewsSection !== false,
+                            localSettings.showHeroSection !== false
+                          ].filter(Boolean).length >= 7;
 
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const updated = {
-                            ...localSettings,
-                            showHeroSection: true,
-                            showServicesSection: false,
-                            showPricingSection: false,
-                            showGallerySection: false,
-                            showCoverageMapSection: false,
-                            showWhyUsSection: false,
-                            showReviewsSection: false,
-                            showFaqSection: false,
-                          };
-                          setLocalSettings(updated);
-                          updateSettings(updated);
-                          showNotification('تمامی بخش‌های فرعی مخفی شدند (فقط هیرو فعال است).');
+                          if (isCurrentlyActive) {
+                            const updated = {
+                              ...localSettings,
+                              showHeroSection: true,
+                              showServicesSection: false,
+                              showPricingSection: false,
+                              showGallerySection: false,
+                              showCoverageMapSection: false,
+                              showWhyUsSection: false,
+                              showReviewsSection: false,
+                              showFaqSection: false,
+                            };
+                            setLocalSettings(updated);
+                            updateSettings(updated);
+                            showNotification('تمامی بخش‌های فرعی به صورت موقت مخفی شدند.');
+                          } else {
+                            const updated = {
+                              ...localSettings,
+                              showHeroSection: true,
+                              showServicesSection: true,
+                              showPricingSection: true,
+                              showGallerySection: true,
+                              showCoverageMapSection: true,
+                              showWhyUsSection: true,
+                              showReviewsSection: true,
+                              showFaqSection: true,
+                              showFloatingBar: true,
+                            };
+                            setLocalSettings(updated);
+                            updateSettings(updated);
+                            showNotification('تمامی بخش‌های وب‌سایت با موفقیت فعال و نمایان شدند.');
+                          }
                         }}
-                        className="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold transition-all cursor-pointer"
+                        className={`w-14 h-7.5 rounded-full transition-colors relative p-1 inline-flex items-center shrink-0 cursor-pointer shadow-inner ${
+                          [
+                            localSettings.showPricingSection !== false,
+                            localSettings.showServicesSection !== false,
+                            localSettings.showGallerySection !== false,
+                            localSettings.showCoverageMapSection !== false,
+                            localSettings.showWhyUsSection !== false,
+                            localSettings.showFaqSection !== false,
+                            localSettings.showReviewsSection !== false,
+                            localSettings.showHeroSection !== false
+                          ].filter(Boolean).length >= 7 
+                            ? 'bg-emerald-600' 
+                            : 'bg-slate-400 dark:bg-slate-700'
+                        }`}
+                        dir="ltr"
+                        role="switch"
+                        aria-checked={[
+                          localSettings.showPricingSection !== false,
+                          localSettings.showServicesSection !== false,
+                          localSettings.showGallerySection !== false,
+                          localSettings.showCoverageMapSection !== false,
+                          localSettings.showWhyUsSection !== false,
+                          localSettings.showFaqSection !== false,
+                          localSettings.showReviewsSection !== false,
+                          localSettings.showHeroSection !== false
+                        ].filter(Boolean).length >= 7}
                       >
-                        <span>مخفی‌سازی موقت بخش‌ها</span>
+                        <span
+                          className={`w-5.5 h-5.5 rounded-full bg-white shadow-md transform transition-transform duration-200 ease-in-out flex items-center justify-center text-[10px] font-bold ${
+                            [
+                              localSettings.showPricingSection !== false,
+                              localSettings.showServicesSection !== false,
+                              localSettings.showGallerySection !== false,
+                              localSettings.showCoverageMapSection !== false,
+                              localSettings.showWhyUsSection !== false,
+                              localSettings.showFaqSection !== false,
+                              localSettings.showReviewsSection !== false,
+                              localSettings.showHeroSection !== false
+                            ].filter(Boolean).length >= 7
+                              ? 'translate-x-[26px] text-emerald-600'
+                              : 'translate-x-0 text-slate-500'
+                          }`}
+                        >
+                          {[
+                            localSettings.showPricingSection !== false,
+                            localSettings.showServicesSection !== false,
+                            localSettings.showGallerySection !== false,
+                            localSettings.showCoverageMapSection !== false,
+                            localSettings.showWhyUsSection !== false,
+                            localSettings.showFaqSection !== false,
+                            localSettings.showReviewsSection !== false,
+                            localSettings.showHeroSection !== false
+                          ].filter(Boolean).length >= 7 ? '✓' : '✕'}
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -2118,6 +2203,105 @@ export const AdminPanel: React.FC = () => {
                         localSettings.showHeroSection !== false
                       ].filter(Boolean).length} از ۸ بخش فعال
                     </span>
+                  </div>
+
+                  {/* Special Master Feature: Global Call for Price Toggle */}
+                  <div className={`p-4 sm:p-5 rounded-2xl border-2 transition-all shadow-md ${
+                    localSettings.forceCallForPrice
+                      ? 'bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent border-amber-500 dark:border-amber-500/80 shadow-amber-500/10'
+                      : 'bg-white dark:bg-slate-900 border-amber-200 dark:border-amber-900/40'
+                  }`}>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      <div className="flex items-start gap-3.5">
+                        <div className={`w-11 h-11 rounded-2xl flex items-center justify-center font-bold shrink-0 mt-0.5 shadow-xs ${
+                          localSettings.forceCallForPrice
+                            ? 'bg-amber-500 text-white animate-pulse'
+                            : 'bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400'
+                        }`}>
+                          <Phone className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap mb-1">
+                            <h5 className="text-sm sm:text-base font-black text-slate-900 dark:text-white">
+                              تغییر همه قیمت‌های سایت به «برای استعلام قیمت تماس بگیرید»
+                            </h5>
+                            <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${
+                              localSettings.forceCallForPrice
+                                ? 'bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border-amber-300 dark:border-amber-700'
+                                : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 border-slate-300 dark:border-slate-700'
+                            }`}>
+                              {localSettings.forceCallForPrice ? '● حالت استعلام تلفنی فعال است' : '○ نمایش قیمت‌های ریالی معمولی'}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            با فعال‌سازی این دکمه، تمام مبالغ و تعرفه‌ها در همه جای سایت (کارت‌های خدمات، محاسبه‌گر استعلام و جدول‌ها) برداشته شده و با عبارت «برای استعلام قیمت تماس بگیرید» جایگزین می‌شوند.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = { ...localSettings, forceCallForPrice: !localSettings.forceCallForPrice };
+                            setLocalSettings(updated);
+                            updateSettings(updated);
+                            showNotification(
+                              updated.forceCallForPrice 
+                                ? 'حالت استعلام تلفنی فعال شد؛ کلیه قیمت‌های سایت به «برای استعلام قیمت تماس بگیرید» تغییر یافتند.' 
+                                : 'نمایش مبالغ و قیمت‌های ریالی در سایت فعال شد.'
+                            );
+                          }}
+                          className={`w-14 h-7.5 rounded-full transition-colors relative p-1 inline-flex items-center shrink-0 cursor-pointer shadow-inner ${
+                            localSettings.forceCallForPrice ? 'bg-amber-600' : 'bg-slate-300 dark:bg-slate-700'
+                          }`}
+                          dir="ltr"
+                          role="switch"
+                          aria-checked={Boolean(localSettings.forceCallForPrice)}
+                        >
+                          <span
+                            className={`w-5.5 h-5.5 rounded-full bg-white shadow-md transform transition-transform duration-200 ease-in-out ${
+                              localSettings.forceCallForPrice ? 'translate-x-[26px]' : 'translate-x-0'
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Custom text preview / editor */}
+                    {localSettings.forceCallForPrice && (
+                      <div className="mt-3.5 pt-3.5 border-t border-amber-200/80 dark:border-amber-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                        <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                          <Tag className="w-4 h-4 text-amber-500 shrink-0" />
+                          <span className="font-bold">متن جایگزین قیمت:</span>
+                        </div>
+                        <div className="flex items-center gap-2 w-full sm:w-auto">
+                          <input
+                            type="text"
+                            value={localSettings.callForPriceCustomText || 'برای استعلام قیمت تماس بگیرید'}
+                            onChange={e => {
+                              const updated = { ...localSettings, callForPriceCustomText: e.target.value };
+                              setLocalSettings(updated);
+                              updateSettings(updated);
+                            }}
+                            placeholder="برای استعلام قیمت تماس بگیرید"
+                            className="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-700 text-xs font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-hidden w-full sm:w-72 text-right"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = { ...localSettings, callForPriceCustomText: 'برای استعلام قیمت تماس بگیرید' };
+                              setLocalSettings(updated);
+                              updateSettings(updated);
+                              showNotification('متن به حالت پیش‌فرض «برای استعلام قیمت تماس بگیرید» بازنشانی شد.');
+                            }}
+                            className="px-2.5 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 dark:bg-amber-950 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 text-[11px] font-bold shrink-0 transition-colors cursor-pointer"
+                          >
+                            پیش‌فرض
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Section Cards Grid */}
@@ -6039,28 +6223,177 @@ export const AdminPanel: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-2 shrink-0">
+                      <div className="flex items-center gap-3 bg-white dark:bg-slate-800/90 p-2 sm:px-3 sm:py-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm shrink-0">
+                        <div className="text-right">
+                          <span className="text-xs font-black text-slate-900 dark:text-white block">
+                            {[
+                              localSettings.showPricingSection !== false,
+                              localSettings.showServicesSection !== false,
+                              localSettings.showGallerySection !== false,
+                              localSettings.showCoverageMapSection !== false,
+                              localSettings.showWhyUsSection !== false,
+                              localSettings.showFaqSection !== false,
+                              localSettings.showReviewsSection !== false,
+                              localSettings.showHeroSection !== false
+                            ].filter(Boolean).length >= 7
+                              ? 'تمام بخش‌ها فعال'
+                              : 'مخفی‌سازی موقت'}
+                          </span>
+                        </div>
                         <button
                           type="button"
                           onClick={() => {
-                            const updated = {
-                              ...localSettings,
-                              showHeroSection: true,
-                              showServicesSection: true,
-                              showPricingSection: true,
-                              showGallerySection: true,
-                              showCoverageMapSection: true,
-                              showWhyUsSection: true,
-                              showReviewsSection: true,
-                              showFaqSection: true,
-                            };
+                            const isCurrentlyActive = [
+                              localSettings.showPricingSection !== false,
+                              localSettings.showServicesSection !== false,
+                              localSettings.showGallerySection !== false,
+                              localSettings.showCoverageMapSection !== false,
+                              localSettings.showWhyUsSection !== false,
+                              localSettings.showFaqSection !== false,
+                              localSettings.showReviewsSection !== false,
+                              localSettings.showHeroSection !== false
+                            ].filter(Boolean).length >= 7;
+
+                            if (isCurrentlyActive) {
+                              const updated = {
+                                ...localSettings,
+                                showHeroSection: true,
+                                showServicesSection: false,
+                                showPricingSection: false,
+                                showGallerySection: false,
+                                showCoverageMapSection: false,
+                                showWhyUsSection: false,
+                                showReviewsSection: false,
+                                showFaqSection: false,
+                              };
+                              setLocalSettings(updated);
+                              updateSettings(updated);
+                              showNotification('تمامی بخش‌های فرعی به صورت موقت مخفی شدند.');
+                            } else {
+                              const updated = {
+                                ...localSettings,
+                                showHeroSection: true,
+                                showServicesSection: true,
+                                showPricingSection: true,
+                                showGallerySection: true,
+                                showCoverageMapSection: true,
+                                showWhyUsSection: true,
+                                showReviewsSection: true,
+                                showFaqSection: true,
+                                showFloatingBar: true,
+                              };
+                              setLocalSettings(updated);
+                              updateSettings(updated);
+                              showNotification('تمام بخش‌های صفحه اصلی سایت فعال و نمایان شدند.');
+                            }
+                          }}
+                          className={`w-13 h-7 rounded-full transition-colors relative p-1 inline-flex items-center shrink-0 cursor-pointer shadow-inner ${
+                            [
+                              localSettings.showPricingSection !== false,
+                              localSettings.showServicesSection !== false,
+                              localSettings.showGallerySection !== false,
+                              localSettings.showCoverageMapSection !== false,
+                              localSettings.showWhyUsSection !== false,
+                              localSettings.showFaqSection !== false,
+                              localSettings.showReviewsSection !== false,
+                              localSettings.showHeroSection !== false
+                            ].filter(Boolean).length >= 7 
+                              ? 'bg-emerald-600' 
+                              : 'bg-slate-400 dark:bg-slate-700'
+                          }`}
+                          dir="ltr"
+                          role="switch"
+                          aria-checked={[
+                            localSettings.showPricingSection !== false,
+                            localSettings.showServicesSection !== false,
+                            localSettings.showGallerySection !== false,
+                            localSettings.showCoverageMapSection !== false,
+                            localSettings.showWhyUsSection !== false,
+                            localSettings.showFaqSection !== false,
+                            localSettings.showReviewsSection !== false,
+                            localSettings.showHeroSection !== false
+                          ].filter(Boolean).length >= 7}
+                        >
+                          <span
+                            className={`w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200 ease-in-out flex items-center justify-center text-[10px] font-bold ${
+                              [
+                                localSettings.showPricingSection !== false,
+                                localSettings.showServicesSection !== false,
+                                localSettings.showGallerySection !== false,
+                                localSettings.showCoverageMapSection !== false,
+                                localSettings.showWhyUsSection !== false,
+                                localSettings.showFaqSection !== false,
+                                localSettings.showReviewsSection !== false,
+                                localSettings.showHeroSection !== false
+                              ].filter(Boolean).length >= 7
+                                ? 'translate-x-[24px] text-emerald-600'
+                                : 'translate-x-0 text-slate-500'
+                            }`}
+                          >
+                            {[
+                              localSettings.showPricingSection !== false,
+                              localSettings.showServicesSection !== false,
+                              localSettings.showGallerySection !== false,
+                              localSettings.showCoverageMapSection !== false,
+                              localSettings.showWhyUsSection !== false,
+                              localSettings.showFaqSection !== false,
+                              localSettings.showReviewsSection !== false,
+                              localSettings.showHeroSection !== false
+                            ].filter(Boolean).length >= 7 ? '✓' : '✕'}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Master Call for Price Toggle in Content Settings */}
+                    <div className={`p-4 rounded-xl border-2 transition-all shadow-sm ${
+                      localSettings.forceCallForPrice
+                        ? 'bg-amber-500/10 border-amber-500 text-slate-900 dark:text-white'
+                        : 'bg-white dark:bg-slate-900 border-amber-200 dark:border-amber-900/50'
+                    }`}>
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold shrink-0 ${
+                            localSettings.forceCallForPrice
+                              ? 'bg-amber-500 text-white'
+                              : 'bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400'
+                          }`}>
+                            <Phone className="w-4.5 h-4.5" />
+                          </div>
+                          <div>
+                            <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white block">
+                              تغییر همه قیمت‌های سایت به «برای استعلام قیمت تماس بگیرید»
+                            </span>
+                            <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                              تبدیل تمام مبالغ ریالی سایت به حالت استعلام تلفنی با ۱ کلیک
+                            </span>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = { ...localSettings, forceCallForPrice: !localSettings.forceCallForPrice };
                             setLocalSettings(updated);
                             updateSettings(updated);
-                            showNotification('تمام بخش‌های صفحه اصلی سایت فعال و نمایان شدند.');
+                            showNotification(
+                              updated.forceCallForPrice 
+                                ? 'حالت استعلام تلفنی فعال شد؛ تمام قیمت‌ها به «برای استعلام قیمت تماس بگیرید» تغییر یافتند.' 
+                                : 'نمایش مبالغ و قیمت‌های ریالی فعال شد.'
+                            );
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors cursor-pointer shadow-xs"
+                          className={`w-13 h-7 rounded-full transition-colors relative p-1 inline-flex items-center shrink-0 cursor-pointer shadow-inner ${
+                            localSettings.forceCallForPrice ? 'bg-amber-600' : 'bg-slate-300 dark:bg-slate-700'
+                          }`}
+                          dir="ltr"
+                          role="switch"
+                          aria-checked={Boolean(localSettings.forceCallForPrice)}
                         >
-                          فعال‌سازی همه بخش‌ها
+                          <span
+                            className={`w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200 ease-in-out ${
+                              localSettings.forceCallForPrice ? 'translate-x-[24px]' : 'translate-x-0'
+                            }`}
+                          />
                         </button>
                       </div>
                     </div>

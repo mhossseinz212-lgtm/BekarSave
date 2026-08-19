@@ -390,7 +390,9 @@ export const CostEstimator: React.FC = () => {
                       }`}
                     >
                       <span className="block text-xs font-bold mb-0.5">{item.title}</span>
-                      <span className="block text-[11px] text-blue-600 dark:text-blue-400 font-mono">{toPersianDigits(item.price)}</span>
+                      <span className="block text-[11px] text-blue-600 dark:text-blue-400 font-mono">
+                        {settings.forceCallForPrice ? (settings.callForPriceCustomText || 'برای استعلام قیمت تماس بگیرید') : toPersianDigits(item.price)}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -420,7 +422,9 @@ export const CostEstimator: React.FC = () => {
                       }`}
                     >
                       <span className="block text-xs font-bold mb-0.5">{item.title}</span>
-                      <span className="block text-[11px] text-blue-600 dark:text-blue-400 font-mono">{toPersianDigits(item.price)}</span>
+                      <span className="block text-[11px] text-blue-600 dark:text-blue-400 font-mono">
+                        {settings.forceCallForPrice ? (settings.callForPriceCustomText || 'برای استعلام قیمت تماس بگیرید') : toPersianDigits(item.price)}
+                      </span>
                     </button>
                   ))}
                 </div>
