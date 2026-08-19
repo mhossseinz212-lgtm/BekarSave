@@ -642,50 +642,7 @@ export const savehNeighborhoods: NeighborhoodInfo[] = [];
 
 export const initialReviews: ReviewItem[] = [];
 
-export const initialGallery: GalleryItem[] = [
-  {
-    id: 'gal-img-1',
-    title: 'لوله بازکنی تخصصی سینک و کف‌شور با فنر تمیز و بی‌صدا',
-    category: 'لوله بازکنی',
-    type: 'image',
-    mediaUrl: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=800',
-    description: 'رفع گرفتگی لوله فاضلاب آشپزخانه بدون ذره‌ای پاشش آب و کثیف‌کاری، ضدعفونی کامل و تست سرعت عبور آب با رضایت کامل مشتری.',
-    highlights: [
-      'فنر کاملاً بهداشتی و بدون بو',
-      'تراشیدن رسوبات چربی دیواره لوله',
-      'حضور سریع در کمتر از ۲۰ دقیقه'
-    ],
-    location: 'خیابان مطهری ساوه'
-  },
-  {
-    id: 'gal-img-2',
-    title: 'تخلیه چاه با تانکر مکنده پرقدرت و پمپ لجن‌کش ساکشن',
-    category: 'تخلیه چاه',
-    type: 'image',
-    mediaUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800',
-    description: 'تخلیه کامل سپتیک و چاه فاضلاب با تانکر ۱۲۰۰۰ لیتری و شیلنگ‌های فشارقوی بدون بوی نامطبوع در محیط، لجن‌کشی و لایروبی رسوبات کف چاه.',
-    highlights: [
-      'پمپ لجن‌کش پرقدرت سه فاز',
-      'شیلنگ بلند برای مسافت‌های دور',
-      'تخلیه کامل تا کف بدون باقیمانده'
-    ],
-    location: 'شهرک صنعتی کاوه'
-  },
-  {
-    id: 'gal-img-3',
-    title: 'حفر چاه فاضلاب جذبی نوساز همراه با کول‌گذاری بتنی و گلدان',
-    category: 'حفر چاه',
-    type: 'image',
-    mediaUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&q=80&w=800',
-    description: 'حفر اصولی میله و انباری چاه فاضلاب توسط مقنی‌های باتجربه و بیمه‌شده با استانداردهای ایمنی کامل و استحکام‌بخشی با کول‌های بتنی مقاوم.',
-    highlights: [
-      'مقنی حرفه‌ای و دارای بیمه حوادث',
-      'کول‌گذاری بتنی ضد ریزش',
-      'تعیین بهترین نقطه جذب خاک'
-    ],
-    location: 'شهرک بسیج ساوه'
-  }
-];
+export const initialGallery: GalleryItem[] = [];
 
 export const initialBookings: BookingRequest[] = [
   {

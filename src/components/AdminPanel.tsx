@@ -5164,8 +5164,30 @@ export const AdminPanel: React.FC = () => {
                   )}
 
                   {/* Gallery Items Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {gallery.map(g => (
+                  {gallery.length === 0 ? (
+                    <div className="p-8 text-center bg-slate-50 dark:bg-slate-800/40 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 my-4">
+                      <ImageIcon className="w-10 h-10 text-slate-400 mx-auto mb-2 opacity-60" />
+                      <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1">
+                        گالری و لیست نمونه‌کارها در حال حاضر کاملاً خالی است.
+                      </h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+                        برای نمایش نمونه‌کار در سایت، روی دکمه «افزودن نمونه‌کار جدید» در بالا کلیک کنید.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowAddGalForm(true);
+                          setEditingGalId(null);
+                        }}
+                        className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-sm"
+                      >
+                        <Plus className="w-4 h-4" />
+                        <span>افزودن اولین نمونه‌کار</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {gallery.map(g => (
                       <div key={g.id} className="flex flex-col rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xs hover:shadow-md transition-shadow">
                         {/* Media Preview */}
                         {g.type === 'before-after' ? (
@@ -5273,6 +5295,7 @@ export const AdminPanel: React.FC = () => {
                       </div>
                     ))}
                   </div>
+                  )}
                 </div>
               )}
 

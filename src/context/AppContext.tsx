@@ -813,10 +813,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       try {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
-          const filtered = parsed.filter((item: GalleryItem) => item && !item.id?.startsWith('gal-ba-'));
-          if (filtered.length > 0) {
-            return filtered;
-          }
+          // Filter out legacy default items and before-after legacy prefixes
+          const customOnly = parsed.filter((item: GalleryItem) => 
+            item && !item.id?.startsWith('gal-ba-') && !['gal-img-1', 'gal-img-2', 'gal-img-3'].includes(item.id)
+          );
+          return customOnly;
         }
       } catch (e) {
         console.error(e);
